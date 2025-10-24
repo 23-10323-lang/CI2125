@@ -1,0 +1,17 @@
+Z=>Z chs := fn(Z n) ->sub(n)(0);
+Z=>Z not := fn(Z p) ->sub(1)(0);
+Z=>Z =>Z and:= fn(Z p) ->fn(Z q)->if(p,q,0);
+Z=>Z =>Z or:= fn(Z p) ->fn(Z q)->if(p,1,q);
+
+Z=>Z chs := fn(Z n) -> sub(n)(0); 
+Z=>Z not := fn(Z p) -> sub(p)(1); 
+Z=>Z=>Z and := fn(Z p) -> fn(Z q) -> if(p, q, 0); 
+Z=>Z=>Z or := fn(Z p) -> fn(Z q) -> if(p, 1, q);
+
+Z=>Z=>Z add := fn(Z q) -> fn(Z p) -> sub(chs(q))(p); 
+Z=>Z=>Z min := fn(Z a) -> fn(Z b) -> if(lt(b)(a), a, b);
+Z=>Z t4 := fn(Z p) -> add(p)(add(p)(add(p)(p))); 
+Z=>Z t256 := fn(Z p) -> t4(t4(t4(t4(p))));
+
+Z=>Z=>Z implies := fn(Z p) -> fn(Z q) -> or(not(p))(q); 
+Z=>Z=>Z=>Z D := fn(Z x) -> fn(Z y) -> fn(Z z) -> and(or(x)(y))(not(and(y)(z)));
