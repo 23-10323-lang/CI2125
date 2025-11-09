@@ -1,0 +1,151 @@
+Parte A)
+g++ names.h names.cxx test.cxx -o test
+~/workspace$ ./test 16
+Walter L. Ruiz
+Bruno M. Quevedo
+Héctor C. Domínguez
+Raquel Z. Ordoñez
+Kayla K. Yanez
+Ignacio D. Domínguez
+Susana C. Domínguez
+Roberto J. Montoya
+Wanda F. Ruiz
+Samuel J. Yanez
+Luis D. Brito
+Fernanda S. Alvarado
+Carlos B. Yanez
+Ernesto C. Domínguez
+Graciela G. Xu
+Pedro K. León
+
+Parte B)
+g++ sort_int.h sort_int.cxx test.cxx -o test
+~/workspace$ ./test 20
+datos antes:
+   0:  383
+   1:  886
+   2:  777
+   3:  915
+   4:  793
+   5:  335
+   6:  386
+   7:  492
+   8:  649
+   9:  421
+  10:  362
+  11:   27
+  12:  690
+  13:   59
+  14:  763
+  15:  926
+  16:  540
+  17:  426
+  18:  172
+  19:  736
+
+datos despues:
+   0:   27
+   1:   59
+   2:  172
+   3:  335
+   4:  362
+   5:  383
+   6:  386
+   7:  421
+   8:  426
+   9:  492
+  10:  540
+  11:  649
+  12:  690
+  13:  736
+  14:  763
+  15:  777
+  16:  793
+  17:  886
+  18:  915
+  19:  926
+
+Parte c)
+
+cd sorting_double_numbers
+~/workspace/sorting_double_numbers$ g++ sort_double.cxx sort_double.h test.cxx -o test
+~/workspace/sorting_double_numbers$ ./test 256
+uso: ./test n (para 0 <= n < 128)
+~/workspace/sorting_double_numbers$ ./test 20
+datos antes:
+   0:   5.443003
+   1:  -1.689873
+   2:   4.529588
+   3:   4.775041
+   4:   6.586358
+   5:  -4.839178
+   6:  -2.636436
+   7:   4.291674
+   8:  -3.555605
+   9:   0.863519
+  10:  -0.361647
+  11:   2.061935
+  12:  -2.163448
+  13:   0.214415
+  14:   7.235676
+  15:   6.659121
+  16:   2.171388
+  17:   3.476751
+  18:  -5.734359
+  19:   1.711502
+
+datos despues:
+   0:  -5.734359
+   1:  -4.839178
+   2:  -3.555605
+   3:  -2.636436
+   4:  -2.163448
+   5:  -1.689873
+   6:  -0.361647
+   7:   0.214415
+   8:   0.863519
+   9:   1.711502
+  10:   2.061935
+  11:   2.171388
+  12:   3.476751
+  13:   4.291674
+  14:   4.529588
+  15:   4.775041
+  16:   5.443003
+  17:   6.586358
+  18:   6.659121
+  19:   7.235676
+
+Parte d)
+
+d sorting_strings
+g++ names.cxx names.h sort_string.cxx sort_string.h test.cxx -o test
+
+~/workspace/sorting_strings$ ./test 10
+datos antes:
+   0: Walter L. Ruiz
+   1: Bruno M. Quevedo
+   2: Héctor C. Domínguez
+   3: Raquel Z. Ordoñez
+   4: Kayla K. Yanez
+   5: Ignacio D. Domínguez
+   6: Susana C. Domínguez
+   7: Roberto J. Montoya
+   8: Wanda F. Ruiz
+   9: Samuel J. Yanez
+
+datos despues:
+   0: Bruno M. Quevedo
+   1: Héctor C. Domínguez
+   2: Ignacio D. Domínguez
+   3: Kayla K. Yanez
+   4: Raquel Z. Ordoñez
+   5: Roberto J. Montoya
+   6: Samuel J. Yanez
+   7: Susana C. Domínguez
+   8: Walter L. Ruiz
+   9: Wanda F. Ruiz
+
+Parte E)
+~/workspace$ cd Zilly
+~/workspace/Zilly$ g++ zilly.cxx -o test
