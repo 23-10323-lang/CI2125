@@ -1,58 +1,69 @@
 ///
 /// test.cxx
 ///
-/// programa para probar el ordenamiento de datos enteros
+/// programa para probar el ordenamiento de datos de tipo 'double' (punto flotante de doble precisión)
+///
+/// @@@ NOTA: La idea es que este programa funcione como lo hace el ordenamiento de datos enteros
+/// la única diferencia es que aqui lo hacemos con valores de punto flotante de doble precisión
 ///
 
 #include <cstdio>
 #include <cstdlib>
 
-#include "sort_int.h"
+#include "sort_double.h"
 
 using std::vector;
 
-// La función 'random' es un generador extremadamente simple de números aleatorios
-// Dado el parámetro n, cada llamada a random(n) genera un entero x tal que 0 <= x < n
-// La función random se deriva de la función de librería (stdlib) 'rand'
-// Cada llamada a rand() genera un entero z tal que 0 <= z <= RAND_MAX
-// Recuerdan el operador % ? Una expresión de la forma m % n computa m módulo n ..
-// .. que, como les dijimos en clase, es el resto de la division entera de m entre n.
-// El valor de RAND_MAX depende de la implementacion, pero garantiza ser por lo menos 32767.
-// Por ejemplo: 18 % 7 es igual a 4. Prueba: 18 == 2 * 7 + 4 => 2 es el cociente y 4 el resto.
-// En este ejemplo, limitamos n a ser menor que 1000, asi que la función rand es adecuada.
-// Referencias:
-// https://en.cppreference.com/w/cpp/numeric/random/rand.html
-// https://www.geeksforgeeks.org/cpp/rand-and-srand-in-ccpp/
-int random(int n) {
-    return rand() % n;        
+// Un simple generador de numeros aleatorios
+// de acuerdo a la distribucion uniforme estandard: 0 <= x <= 1
+double uniform() {
+    double numerator = double(rand());
+    double denominator = double(RAND_MAX);
+    return numerator / denominator;
 }
 
-// genera un vector de n enteros (x's) aleatorios, donde cada x cumple 0 <= x < 1000
-vector<int> generate_vector(int n) {
-    vector<int> xs = {};
+// Un simple generador de numeros aleatorios en el intervalo [lb .. ub]
+// Asume (sin chequear) que lb es menor o igual a ub
+double random(double lb, double ub) {
+    return (ub - lb) * uniform() + lb;
+}
+
+// genera el vector (muestra) de datos para la prueba de ordenamiento
+vector<double> generate_vector(int n) {
+    vector<double> data = {};
     for (int i = 0; i < n; ++i) {
-        int x = random(1000);
-        xs.push_back(x);
+        double x = random(-8.0, 8.0);
+        data.push_back(x);
     }
-    return xs;
+    return data;
 }
 
-// muestra los elementos de un vector de enteros (data), prefijados por una etiqueta (label)
-void show(const char *label, const vector<int>& data) {
+// @@@ TIP
+// En lo que sigue, usen el ejemplo de ordenamiento de datos enteros como inspiración.
+// Pueden copiar las partes que deben completar, PERO ..
+// .. no olviden que ahora estan trabajando con datos de tipo 'double' en vez de 'int'
+
+// @@@ TAREA: implementar la funcion 'show' que muestra el vector
+void show(const char *label, const vector<double>& data) {
+    // van a tener que usar un especificador de formato (format specifier) para punto flotante
+    // No se limiten a usar %f: usen uno de la forma %W.Df donde:
+    // W es el ancho necesario para mostrar los números con el punto decimal bien alineado
+    // D es el número de digitos a la derecha del punto decimal: sugiero D igual a 6
+    
     fprintf(stdout, "%s\n", label);
     const int n = data.size();
     for (int i = 0; i < n; ++i) {
-        fprintf(stdout, "%4d: %4d\n", i, data[i]);
+        // Usamos %10.6f para alinear: 10 de ancho total, 6 dígitos decimales
+        fprintf(stdout, "%4d: %10.6f\n", i, data[i]);
     }
     fprintf(stdout, "\n");
 }
 
-// 'run' corre el corazón del programa: 4 pasos sencillos para probar que funciona
-// El parámetro n indica el tamaño del vector (muestra) a ser ordenado
-// 'run' no retorna nada ('void' es 'vacio') pero muestra los datos y resultados
 void run(int n) {
-    // 1. iniciamos la muestra 'data', de tamaño 'n', con números aleatorios para probar el ordenamiento
-    vector<int> data = generate_vector(n);
+    // @@@ TAREA: completar
+    
+    // 1. iniciamos la muestra 'data', de tamaño 'n', con números aleatorios
+    vector<double> data = generate_vector(n);
 
     // 2. muestra los datos (desordenados) antes de ordenarlos
     show("datos antes:", data);
@@ -64,25 +75,23 @@ void run(int n) {
     show("datos despues:", data);
 }
 
-// se queja del mal uso del programa, si ese es el caso
 void bad_usage(const char *program) {
-    fprintf(stderr, "uso: %s n (para 0 <= n < 1000)\n", program);
+    fprintf(stderr, "uso: %s n (para 0 <= n < 128)\n", program);
 }
 
-// procedimiento principal: la interfaz con el shell (comandos interactivos) del usuario
 int main(int argc, const char *argv[]) {
+    // @@@ TAREA: completar
+    
     // argc debe ser 2 porque el programa requiere pasar n (tamaño de la muestra) como argumento
     if (argc != 2) {
         bad_usage(argv[0]);
-        // EXIT_FAILURE es un código de salida del programa que indica que hubo error
-        // si su ambiente de desarrollo no lo define, pueden reemplazarlo con facilidad
-        // todo número distinto de 0 indica que hubo una falla.
         return EXIT_FAILURE;
     }
 
     // extraemos el tamaño de la muestra especificado por el usuario
     int n = atoi(argv[1]);
-    if (n < 0 || 1000 <= n) {
+    // Ajustado al límite de la tarea
+    if (n < 0 || 128 <= n) {
         bad_usage(argv[0]);
         return EXIT_FAILURE;
     }
