@@ -1,0 +1,123 @@
+#include <cstdio>
+#include <string>
+#include <vector>
+
+using std::vector;
+using std::string;
+
+// ["0X11D", "Malta"
+// ,"0X2AC", "Malta"
+// ]
+// malta = filter(Bebida, Bebida.NombreBeb = "Malta");
+// gusta_malta = filter( X(Gusta,malta), Gusta.CodBeb= malta.CodBeb);
+// no_gusta_malta = filter(Gusta, count(filter(gusta_malta, gusta_malta.CI = Gusta.CI)) = 0)
+// bebedores_no_gusta_malta = pr(
+//     filter(
+//       X(bebedores, no_gusta_malta),
+//       bebedores.CI = no_gusta_malta.CI
+//     ),
+//     bebedores.CI,
+//     bebedores.nombre
+//   );
+//
+//
+// [ 26541223, 0X11D
+//   27654324, 0X2AC
+//   20123456, 0X369
+// ]
+//
+// 26541223 27654324 ..
+//
+//
+// filter =
+// [ 26541223, 0X11D, 0X11D, "Malta"
+//   27654324, 0X2AC, 0X2AC, "Malta"
+// ]
+
+struct Bebedor {
+  long int ci;
+  string nombre;
+};
+
+
+int main(){
+  // Bebedor b0 = Bebedor(12341545, "kjds");
+  Bebedor b1 = {12345678, "Juan Perez"};
+  Bebedor b2 = {87654321, "Maria Gomez"};
+  Bebedor b3 = {11223344, "Luis Rodriguez"};
+  Bebedor b4 = {44332211, "Ana Martinez"};
+  Bebedor b5 = {55667788, "Carlos Sanchez"};
+  vector<Bebedor> bebedores = {b1, b2, b3, b4, b5};
+
+  auto pr_ci = [](const Bebedor& b) {
+    return b.ci;
+  };
+
+  auto pr_nombre = [](const Bebedor& b) {
+    return b.nombre;
+  };
+
+  auto pr = [](const vector<Bebedor>& b, auto f) {
+    vector<long int> bebedores;
+    for (auto bebedor : b)
+      bebedores.push_back(f(bebedor));
+    return bebedores;
+  };
+
+  for (auto b : pr(bebedores, pr_ci))
+    fprintf(stdout, "%ld\n", b);
+
+
+  // filter ::forall T. vector<T> -> (vector<T> -> Bool) -> vector<T>
+  auto filter = []<typename T>(const vector<T>& data, auto f){
+    vector<T> result;
+    for (T item : data){
+      bool cond = f(item);
+      if(cond){
+        result.push_back(item);
+      }
+    }
+    return result;
+  };
+
+
+  auto is_even = [](long int x){
+    return (x % 2) == 0;
+  };
+
+  // for (auto b : filter(pr(bebedores, pr_ci), is_even))
+  //   fprintf(stdout, "even ci: %ld\n", b);
+
+  auto X = []<typename T, typename U>(const vector<T>& a, const vector<U>& b){
+    vector<std::pair<T,U>> result;
+    for (auto x : a){
+      for (auto y : b){
+        result.push_back(std::make_pair(x,y));
+      }
+    }
+    return result;
+  };
+
+  // for(auto bb : X(bebedores,bebedores)){
+  //   fprintf(stdout, "X: %ld, %s -- %ld, %s\n",
+  //     bb.first.ci, bb.first.nombre.c_str(),
+  //     bb.second.ci, bb.second.nombre.c_str()
+  //   );
+  // }
+
+  auto agg = []<typename T>(const vector<T>& data, auto f, auto init){
+    auto result = init;
+    for (T item : data)
+      result = f(result, item);
+    return result;
+  };
+
+  auto g = []<typename T>(int i,T _){return i + 1;};
+  auto count = [agg,g]<typename T>(const vector<T>& data){
+    return agg(data, g, 0);
+  };
+
+  fprintf(stdout, "count bebedores: %d\n", count(bebedores));
+
+  return 0;
+}
