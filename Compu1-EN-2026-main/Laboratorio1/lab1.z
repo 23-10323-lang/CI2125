@@ -1,0 +1,7 @@
+Z => Z => Z ne   := 1 si ambos argumentos son distintos, 0 de otra forma.
+Z => Z => Z xor  := 0 si ambos argumentos valuan a true o a false, 1 de otra forma.
+Z => Z      sgn  := retorna 1 si el numero es positivo, 0 si es 0, y -1 si es negativo.
+Z => Z      abs  := retorna el valor absolute de un numero.
+Z => Z => Z mulP := retorna la multiplicacion de dos numeros positivos.
+Z => Z => Z mul  := retorna la multiplicacion de dos numeros cualquiera.
+Z => Z      sqrt := retorna el piso de la raiz cuadrada de un numero positivo.

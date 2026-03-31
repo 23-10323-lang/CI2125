@@ -1,0 +1,28 @@
+///
+/// Query.cxx - archiv para completar los ejercicios del examen
+///
+/// Aqui deben realizar sus tareas de algebra relacional
+/// La salida de cada query debe imprimir la tabla del resultado
+/// .. y retornar EXIT_SUCCESS, de ser exitosa, o EXIT_FAILURE en caso de falla.
+
+#include "Query.h"
+// .. y otros encabezados que van a ser necesarios
+#include <cstdio>
+#include <cstdlib>
+#include <vector>
+#include "Estudiante.h"
+
+float Query::q0() {
+    fprintf(stderr, "El query q%d no está implementado todavía\n", 0);
+    return -1; // se supone que va a ser exitoso cuando lo implementen ;-)
+}
+
+std::vector<Estudiante> Query::q1() {
+    fprintf(stderr, "El query q%d no está implementado todavía\n", 1);
+    return {};
+}
+
+int Query::q2() {
+    fprintf(stderr, "El query q%d no está implementado todavía\n", 2);
+    return -1;
+}
