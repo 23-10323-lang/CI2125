@@ -1,0 +1,3 @@
+Z => Z => Z mod := fn (Z x) -> fn (Z y) -> -1;
+Z => Z => Z gcd := fn (Z x) -> fn (Z y) -> -1;
+Z => Z => Z phi := fn (Z x) -> fn (Z y) -> -1;
